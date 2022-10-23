@@ -5,19 +5,21 @@ using UnityEngine;
 
 public class Stock : MonoBehaviour
 {
-   private Dictionary<int , int> MineralStock = new Dictionary<int , int>();
+    private Dictionary<int, int> MineralStock = new Dictionary<int, int>();
 
-    public delegate void MineralWasMain(int Price, int Amount, Sprite Icon);
-    public static event MineralWasMain MineralMain;
 
     [SerializeField] private int _timeBeforSell;
-    private bool _isSellBattonDown = true;
+    [SerializeField] private bool _isSellBattonDown = true;
+
+    private void Start()
+    {
+        StartCoroutine(Sales—ircle());
+    }
     public void GotMineral(MineralScripteblObject Mineral)
     {
         try
         {
-            MineralStock[Mineral.MineralLvl] += 1;
-            MineralMain(Mineral.Price, MineralStock[Mineral.MineralLvl], Mineral.MineralIcon);
+            MineralStock[Mineral.MineralLvl] += 1;           
         }
         catch (Exception e) 
         { 
@@ -29,8 +31,26 @@ public class Stock : MonoBehaviour
     private IEnumerator Sales—ircle()
     {       
         yield return new WaitForSeconds(_timeBeforSell);
-        if (_isSellBattonDown) 
-          StartCoroutine(Sales—ircle()); _isSellBattonDown = false;
-        Debug.Log("Corutine work!");
+        if (_isSellBattonDown)
+        {
+            SellAll();
+        }
+        else if(_isSellBattonDown == false)
+        {
+         Debug.Log("Corutine work!");
+        }
+         RepitCorutine();
+    }
+
+    private void RepitCorutine()
+    {
+       StartCoroutine(Sales—ircle());
+    }
+
+    private void SellAll()
+    {
+        Debug.Log("Corutine return!"); 
+        _isSellBattonDown = false;
+        return;
     }
 }
