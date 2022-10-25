@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Maney : MonoBehaviour
+public class Wallet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int Maney { get; private set; } = 0;
+
+    public void MinuseManey(int MinseManey)
     {
-        
+        Maney -= MinseManey;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PluseManey(int PluseManey)
     {
-        
+        Maney += PluseManey;
     }
 }
