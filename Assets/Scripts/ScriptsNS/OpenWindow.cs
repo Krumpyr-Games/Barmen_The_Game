@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class OpenWindow : MonoBehaviour
 {
-public bool open_or_close = false;
-public Text text_butt;
 
+public bool open_or_close = false; //Check open or close bottom window
+public Text text_butt; //Get text for decorate 
 
 public void open_windowUI(){
     if(open_or_close == false){
@@ -20,6 +20,5 @@ public void open_windowUI(){
       text_butt.text = "" + "∧";
     }
 }
-
 
 }
