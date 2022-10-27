@@ -11,27 +11,27 @@ public class Stock : MonoBehaviour
 
     [SerializeField] private int _timeBeforSell;
     [SerializeField] private Wallet _maney;
-    
+
     private void Start()
     {
-        StartCoroutine(Sales裪rcle());
+        StartCoroutine(Sales小ircle());
     }
     public void GotMineral(MineralScripteblObject Mineral)
     {
         try
         {
-            MineralStock[Mineral.MineralLvl] += 1;           
+            MineralStock[Mineral.MineralLvl] += 1;
         }
-        catch (Exception) 
-        { 
+        catch (Exception)
+        {
             Debug.Log("Error");
             Minerals.Add(Mineral);
             MineralStock.Add(Mineral.MineralLvl,1);
         }
     }
 
-    private IEnumerator Sales裪rcle()
-    {       
+    private IEnumerator Sales小ircle()
+    {
         yield return new WaitForSeconds(_timeBeforSell);
         SellAll();
         RepitCorutine();
@@ -39,23 +39,23 @@ public class Stock : MonoBehaviour
 
     private void RepitCorutine()
     {
-       StartCoroutine(Sales裪rcle());
+       StartCoroutine(Sales小ircle());
     }
 
     private void SellAll()
-    {      
+    {
         for(int i = 0; i < Minerals.Count; i++)
         {
             int AmountMineral = MineralStock[Minerals[i].MineralLvl];
             _maney.PluseManey(AmountMineral * Minerals[i].Price);
             MineralStock[Minerals[i].MineralLvl] = 0;
-        }       
+        }
     }
 
     public void SellAllUseStockInfoBatton()
     {
-        StopCoroutine(Sales裪rcle());
-        StartCoroutine(Sales裪rcle());
+        StopCoroutine(Sales小ircle());
+        StartCoroutine(Sales小ircle());
         SellAll();
     }
 }
