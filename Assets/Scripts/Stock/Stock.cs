@@ -19,13 +19,24 @@ public class Stock : MonoBehaviour
     {
     };
 
-
     [SerializeField] private int _timeBeforSell;
     [SerializeField] private Wallet _maney;
+    private float TheRestOfTime;
 
     private void Start()
     {
-        StartCoroutine(SalesСircle());
+        TheRestOfTime = _timeBeforSell;
+    }
+
+    private void Update()
+    {
+        Debug.Log(TheRestOfTime);
+        TheRestOfTime -= Time.deltaTime;
+        if (TheRestOfTime < 0) 
+        { 
+            SellAll(); 
+            TheRestOfTime = _timeBeforSell; 
+        }    
     }
     public void GotMineral(MineralScripteblObject Mineral)
     {
@@ -43,20 +54,6 @@ public class Stock : MonoBehaviour
         }
     }
 
-    private IEnumerator SalesСircle()
-    {
-       // Debug.Log("до");
-        yield return new WaitForSeconds(_timeBeforSell);
-       // Debug.Log("после");
-        SellAll();
-        RepitCorutine();
-    }
-
-    private void RepitCorutine()
-    {
-       StartCoroutine(SalesСircle());
-    }
-
     private void SellAll()
     {
         for (int i = 0; i < Minerals.Count; i++)
@@ -70,8 +67,7 @@ public class Stock : MonoBehaviour
 
     public void SellAllUseStockInfoBatton()
     {
-        StopCoroutine(SalesСircle());
-        StartCoroutine(SalesСircle());
+        TheRestOfTime = _timeBeforSell;
         SellAll();
     }
 }
