@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Mineral : MonoBehaviour
 {
@@ -8,23 +9,27 @@ public class Mineral : MonoBehaviour
     [SerializeField] private MineralScripteblObject _mineral;
     [SerializeField] private PlayerSteats _playerSteats;
     [SerializeField] private Stock _stock;
-    private SpriteRenderer _renderer;
+    private Image _icon;
 
     private void Start()
     {
-        _renderer = GetComponent<SpriteRenderer>();
+        _icon = GetComponent<Image>();
         SetNewSpraite();
     }
 
     public void SetNewSpraite()
     {
-        _renderer.sprite = _mineral.MineralIcon;
+        _icon = _mineral.MineralIcon;
     }
 
     private void OnMouseDown()
     {
         if (_playerSteats.PlayerWantApdaite)
-            _mineral = MineralUpdaiter(_mineral); SetNewSpraite(); return;
+        {
+            _mineral = MineralUpdaiter(_mineral); 
+            SetNewSpraite(); 
+            return;
+        }      
 
 #pragma warning disable CS0162 
         _stock.GotMineral(_mineral);
