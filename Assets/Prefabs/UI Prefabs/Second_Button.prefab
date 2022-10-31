@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2901604631790952451, guid: 8bd32791469c84203950e94c4307a1f4, type: 3}
+      propertyPath: m_Text
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4383152538629248003, guid: 8bd32791469c84203950e94c4307a1f4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -93,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4383152538629248004, guid: 8bd32791469c84203950e94c4307a1f4, type: 3}
       propertyPath: m_Name
-      value: Button Variant
+      value: Second_Button
       objectReference: {fileID: 0}
     - target: {fileID: 5498499785026317617, guid: 8bd32791469c84203950e94c4307a1f4, type: 3}
       propertyPath: m_Color.b
