@@ -27,7 +27,7 @@ public class econ_const : MonoBehaviour
 
     void Start()
     {
-        money_now = 100000;
+        money_now = 1000;
         levels_mine_now = 1;
         clicks_now = 1;
         clicks_level = 1;
