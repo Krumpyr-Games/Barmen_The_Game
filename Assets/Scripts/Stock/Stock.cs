@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,12 +28,12 @@ public class Stock : MonoBehaviour
     }
 
     private void Update()
-    {
-        Debug.Log(TheRestOfTime);
+    {        
         TheRestOfTime -= Time.deltaTime;
         if (TheRestOfTime < 0) 
-        { 
-            SellAll(); 
+        {
+            SellAll();
+            //SellAll();
             TheRestOfTime = _timeBeforSell; 
         }    
     }
@@ -47,7 +46,6 @@ public class Stock : MonoBehaviour
         }
         catch (Exception)
         {
-            Debug.Log("Error");
             Minerals.Add(Mineral);
             MineralStock.Add(Mineral.MineralLvl,1);
             NewBattonActiveit(Mineral);
@@ -57,11 +55,12 @@ public class Stock : MonoBehaviour
     private void SellAll()
     {
         for (int i = 0; i < Minerals.Count; i++)
-        {       
+        {
             int AmountMineral = MineralStock[Minerals[i].MineralLvl];
             _maney.PluseManey(AmountMineral * Minerals[i].Price);
             MineralStock[Minerals[i].MineralLvl] = 0;
             UpdaitAmount(Minerals[i] , AmountMineral);
+            UpdaitAmount(Minerals[i], AmountMineral);
         }
     }
 
