@@ -37,10 +37,12 @@ public class Stock : MonoBehaviour
             TheRestOfTime = _timeBeforSell; 
         }    
     }
+
     public void GotMineral(MineralScripteblObject Mineral)
     {
         try
         {
+
             MineralStock[Mineral.MineralLvl] += 1;
             UpdaitAmount(Mineral , MineralStock[Mineral.MineralLvl]);
         }
