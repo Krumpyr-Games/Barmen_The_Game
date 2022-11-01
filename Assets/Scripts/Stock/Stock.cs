@@ -17,6 +17,8 @@ public class Stock : MonoBehaviour
     public Dictionary<int, int> MineralStock { get; private set; } = new Dictionary<int, int>()
     {
     };
+    [SerializeField] private int maxMinerals;
+    [SerializeField] private int mineralsColl;
 
     [SerializeField] private int _timeBeforSell;
     [SerializeField] private Wallet _maney;
@@ -25,6 +27,7 @@ public class Stock : MonoBehaviour
     private void Start()
     {
         TheRestOfTime = _timeBeforSell;
+        arrayIterationMineral();
     }
 
     private void Update()
@@ -42,15 +45,30 @@ public class Stock : MonoBehaviour
     {
         try
         {
-
-            MineralStock[Mineral.MineralLvl] += 1;
-            UpdaitAmount(Mineral , MineralStock[Mineral.MineralLvl]);
+            if (mineralsColl > maxMinerals)
+            {
+                print("нету места");
+            }
+            else
+            {
+                mineralsColl += 1;
+                MineralStock[Mineral.MineralLvl] += 1;
+                UpdaitAmount(Mineral, MineralStock[Mineral.MineralLvl]);
+            }
         }
         catch (Exception)
         {
             Minerals.Add(Mineral);
             MineralStock.Add(Mineral.MineralLvl,1);
             NewBattonActiveit(Mineral);
+        }
+    }
+
+    private void arrayIterationMineral()
+    {
+        for (int i = 0; i < Minerals.Count; i++)
+        {
+            mineralsColl = MineralStock[Minerals[i].MineralLvl];
         }
     }
 
