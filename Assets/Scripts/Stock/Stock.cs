@@ -18,10 +18,10 @@ public class Stock : MonoBehaviour
     {
     };
     [SerializeField] private int maxMinerals;
-    [SerializeField] private int mineralsColl;
-
     [SerializeField] private int _timeBeforSell;
     [SerializeField] private Wallet _maney;
+
+    private int mineralsColl;
     private float TheRestOfTime;
 
     private void Start()
@@ -45,9 +45,10 @@ public class Stock : MonoBehaviour
     {
         try
         {
-            if (mineralsColl > maxMinerals)
+            if (mineralsColl + 1 > maxMinerals)
             {
                 print("нету места");
+                return;
             }
             else
             {
