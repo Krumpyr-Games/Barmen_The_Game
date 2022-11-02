@@ -47,7 +47,7 @@ public class Stock : MonoBehaviour
         {
             if (mineralsColl + 1 > maxMinerals)
             {
-                print("нету места");
+                Debug.Log("Склад переполнен");
                 return;
             }
             else
@@ -55,6 +55,7 @@ public class Stock : MonoBehaviour
                 mineralsColl += 1;
                 MineralStock[Mineral.MineralLvl] += 1;
                 UpdaitAmount(Mineral, MineralStock[Mineral.MineralLvl]);
+                Debug.Log(mineralsColl);
             }
         }
         catch (Exception)
@@ -70,7 +71,7 @@ public class Stock : MonoBehaviour
         for (int i = 0; i < Minerals.Count; i++)
         {
             mineralsColl = MineralStock[Minerals[i].MineralLvl];
-        }
+        }      
     }
 
     private void SellAll()
