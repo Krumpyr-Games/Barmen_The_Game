@@ -17,12 +17,21 @@ public class Stock : MonoBehaviour
     public Dictionary<int, int> MineralStock { get; private set; } = new Dictionary<int, int>()
     {
     };
-    [SerializeField] private int maxMinerals;
-    [SerializeField] private int _timeBeforSell;
-    [SerializeField] private Wallet _maney;
 
+    [SerializeField] private Wallet _maney;
+    [Header("Game Settings")]
+    [SerializeField] private int _timeBeforSell;
+    [SerializeField] private int StockAmountOfSpace = 20;
+
+    private int maxMinerals = 20;
     private int mineralsColl;
+
     private float TheRestOfTime;
+
+    private int _stockLvl = 1;
+
+   
+    public int StockLvl => _stockLvl;
 
     private void Start()
     {
@@ -83,6 +92,7 @@ public class Stock : MonoBehaviour
             MineralStock[Minerals[i].MineralLvl] = 0;
             UpdaitAmount(Minerals[i] , AmountMineral);
             UpdaitAmount(Minerals[i], AmountMineral);
+            mineralsColl = 0;
         }
     }
 
@@ -90,5 +100,17 @@ public class Stock : MonoBehaviour
     {
         TheRestOfTime = _timeBeforSell;
         SellAll();
+    }
+
+    public void UpdaiteSock()
+    {
+       _stockLvl += 1;
+        
+       maxMinerals = StockAmountOfSpace;
+       for (int i = 0; i < StockLvl - 1; i++)
+       {
+         maxMinerals *= 2;
+       }
+        Debug.Log(maxMinerals);
     }
 }
