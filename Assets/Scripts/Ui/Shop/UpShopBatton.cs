@@ -14,6 +14,7 @@ public class UpShopBatton : MonoBehaviour
     public enum ShopBattonKind
     {
         StockUp,
+        LakyUp
     }
 
     private void Start()

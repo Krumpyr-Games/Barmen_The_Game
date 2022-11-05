@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Stock : MonoBehaviour
 {
@@ -19,18 +20,17 @@ public class Stock : MonoBehaviour
     };
 
     [SerializeField] private Wallet _maney;
+    [SerializeField] private Laky _laky;
     [Header("Game Settings")]
     [SerializeField] private int _timeBeforSell;
     [SerializeField] private int StockAmountOfSpace = 20;
+   
 
     private int maxMinerals = 20;
     private int mineralsColl;
-
     private float TheRestOfTime;
-
     private int _stockLvl = 1;
 
-   
     public int StockLvl => _stockLvl;
 
     private void Start()
@@ -62,9 +62,9 @@ public class Stock : MonoBehaviour
             else
             {
                 mineralsColl += 1;
-                MineralStock[Mineral.MineralLvl] += 1;
+                int mineral = _laky.ChoiceOfLuck(Mineral.MineralLvl);
+                MineralStock[Mineral.MineralLvl] += mineral;
                 UpdaitAmount(Mineral, MineralStock[Mineral.MineralLvl]);
-                Debug.Log(mineralsColl);
             }
         }
         catch (Exception)

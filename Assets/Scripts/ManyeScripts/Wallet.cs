@@ -8,8 +8,7 @@ public class Wallet : MonoBehaviour
 
     private void Start()
     {
-        PluseManey(10000000);
-        
+        PluseManey(10000);
         _maneyUi.SetNewManeyUi(Maney);
     }
 

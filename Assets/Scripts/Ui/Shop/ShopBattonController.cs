@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopBattonController : MonoBehaviour
@@ -12,45 +11,65 @@ public class ShopBattonController : MonoBehaviour
     [SerializeField] private UpShopBatton[] _shopBattons;
     [Header("Настройки баланса")]
     [SerializeField] private int _prayseSecondeLvl;
-    private int Prayse;
+
     public void StockUp()
     {
-        int StockLvl = _stock.StockLvl + 1;       
-        if (StockLvl != 2)
-        {
-            Prayse = _prayseSecondeLvl;
-            for (int i = 0; i < StockLvl - 2; i++)
-            {
-                Prayse *= 2;          
-            }
-        }
-        else
-        {
-            Prayse = _prayseSecondeLvl;
-        }
+        int StockLvl = _stock.StockLvl + 1;
 
-        
+        int _prayse = ReturnPrayse(StockLvl);
 
-        bool _enoughMoney  = _wallet.EnoughMoney(Prayse);
-        if (_enoughMoney == false) 
-        {             
-            return; 
-        }
+        if (_wallet.EnoughMoney(_prayse) == false) return;
+
 #pragma warning disable
-         _stock.UpdaiteSock();
-        _wallet.MinuseManey(Prayse);
+        _stock.UpdaiteSock();
+        _wallet.MinuseManey(_prayse);
 
-        UpdaiteBattonStockUp();
+        UpdaiteBattonStockUp(UpShopBatton.ShopBattonKind.StockUp ,
+            ReturnPrayseForUi(StockLvl + 1));
     }
 
-    private void UpdaiteBattonStockUp()
+    private void UpdaiteBattonStockUp(UpShopBatton.ShopBattonKind shopBattonKind , int prayse)
     {
         for (int i = 0; i < _shopBattons.Length; i++)
         {
-            if (_shopBattons[i].BattonKind == UpShopBatton.ShopBattonKind.StockUp)
+            if (_shopBattons[i].BattonKind == shopBattonKind)
             {              
-                _shopBattons[i].SetPrayse(Prayse);               
+                _shopBattons[i].SetPrayse(prayse);               
             }
+        }
+    }
+
+    private int ReturnPrayse(int StockLvl)
+    {
+        if (StockLvl != 2)
+        {
+           int _prayse = _prayseSecondeLvl;
+            for (int i = 0; i < StockLvl - 2; i++)
+            {
+                _prayse *= 2;
+            }
+            return _prayse;
+        }
+        else
+        {
+            return _prayseSecondeLvl;
+        }
+    }
+
+    private int ReturnPrayseForUi(int StockLvl)
+    {
+        if (StockLvl != 2)
+        {
+            int _prayse = _prayseSecondeLvl;
+            for (int i = 0; i < StockLvl - 2; i++)
+            {
+                _prayse *= 2;
+            }
+            return _prayse;
+        }
+        else
+        {
+            return _prayseSecondeLvl * 2;
         }
     }
 }
