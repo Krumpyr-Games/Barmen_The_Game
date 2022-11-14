@@ -20,6 +20,7 @@ public class Laky : MonoBehaviour
 
     public void UpLaky()
     {
+        if (_lakeProcent >= _maxLake) return;
         _lakeProcent += _perecentLakyUp;
     }
 }

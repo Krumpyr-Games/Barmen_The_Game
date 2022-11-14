@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _price: 2
   _mineralLvl: 1
-  _mineralIcon: {fileID: 0}
+  _mineralIcon: {fileID: -712660493, guid: f580bebc805c8ca4ea79da6760b3fbdb, type: 3}

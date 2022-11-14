@@ -7,26 +7,27 @@ public class Mineral : MonoBehaviour
     public static event UpdaiteMineral MineralUpdaiter;
 
     [SerializeField] private MineralScripteblObject _mineral;
-    [SerializeField] private PlayerSteats _playerSteats;
+    [SerializeField] private Player _playerSteats;
     [SerializeField] private Stock _stock;
-    private Image _icon;
+
+    private SpriteRenderer _icon;
 
     private void Start()
     {
-        _icon = GetComponent<Image>();
+        _icon = GetComponent<SpriteRenderer>();
         SetNewSpraite();
     }
 
     public void SetNewSpraite()
     {
-        _icon = _mineral.MineralIcon;
+        _icon.sprite = _mineral.MineralIcon;
     }
 
     private void OnMouseDown()
     {
-        if (_playerSteats.PlayerWantApdaite)
+        if ( _playerSteats._behaviorCurent.GetType() == typeof(UpMineralPlayerBehavior))
         {
-            _mineral = MineralUpdaiter(_mineral); 
+            _mineral = MineralUpdaiter(_mineral);
             SetNewSpraite(); 
             return;
         }      

@@ -62,7 +62,7 @@ public class Stock : MonoBehaviour
             else
             {
                 mineralsColl += 1;
-                int mineral = _laky.ChoiceOfLuck(Mineral.MineralLvl);
+                int mineral = _laky.ChoiceOfLuck(1);
                 MineralStock[Mineral.MineralLvl] += mineral;
                 UpdaitAmount(Mineral, MineralStock[Mineral.MineralLvl]);
             }

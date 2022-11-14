@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: 
   _price: 3
-  _mineralIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   _mineralLvl: 2
+  _mineralIcon: {fileID: 1132428720, guid: f580bebc805c8ca4ea79da6760b3fbdb, type: 3}

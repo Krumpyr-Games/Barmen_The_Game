@@ -8,7 +8,7 @@ public class StockInfoPanel : MonoBehaviour
 
     [SerializeField] private Text _amount;
     [SerializeField] private Text _prayse;
-    [SerializeField] private Image _icon;
+    [SerializeField] private Sprite _icon;
 
     public void Initialization()
     {
