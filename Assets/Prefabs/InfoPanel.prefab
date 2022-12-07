@@ -95,7 +95,7 @@ MonoBehaviour:
   _mineral: {fileID: 11400000, guid: ab67c8edb4f7dbd42a7606ea2c50f939, type: 2}
   _amount: {fileID: 3675566448071338998}
   _prayse: {fileID: 7402991843199838539}
-  _icon: {fileID: 7657272047889339482}
+  _icon: {fileID: 0}
 --- !u!1 &1128047542875152538
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 4beb055f07aaff244873dec698d0363e, type: 3}
+    m_Font: {fileID: 12800000, guid: fd52b1e439645714fa0a560776d11b97, type: 3}
     m_FontSize: 85
     m_FontStyle: 0
     m_BestFit: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 4beb055f07aaff244873dec698d0363e, type: 3}
+    m_Font: {fileID: 12800000, guid: fd52b1e439645714fa0a560776d11b97, type: 3}
     m_FontSize: 85
     m_FontStyle: 0
     m_BestFit: 0

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,7 +10,6 @@ public class Player : MonoBehaviour
     [Header("UpMineralPlayerBehaviorSettings")]
     [SerializeField] private GameObject[] _shop;
     [SerializeField] private GameObject _skipBatton;
-    [SerializeField] private Text[] _panelText;
     [SerializeField] private MineralUp _mineralUp;
     private void Start()
     {
@@ -23,14 +21,15 @@ public class Player : MonoBehaviour
     {
         PlayerBehaviorMap = new Dictionary<Type, IPlayerBehavior>();
 
-        this.PlayerBehaviorMap[typeof(UpMineralPlayerBehavior)] = new UpMineralPlayerBehavior(_skipBatton , _shop , _panelText , _mineralUp);
+        this.PlayerBehaviorMap[typeof(UpMineralPlayerBehavior)] = new UpMineralPlayerBehavior(_skipBatton , _shop , 
+            _mineralUp._mineralTextController, _mineralUp);
         this.PlayerBehaviorMap[typeof(UpWorkerPlayerBehavior)] = new UpWorkerPlayerBehavior();
         this.PlayerBehaviorMap[typeof(WorkPlayerBehavior)] = new WorkPlayerBehavior();
     }
 
     private void SetCurentBehavior()
     {
-        var behaviour = GetPlayrbehavior<UpMineralPlayerBehavior>();
+        var behaviour = GetPlayrbehavior<WorkPlayerBehavior>();
         _behaviorCurent = behaviour;
     }
 

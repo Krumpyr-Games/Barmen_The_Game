@@ -1,4 +1,3 @@
-
 public class UpPlayerBehavior : IPlayerBehavior
 {
     public void Enter()

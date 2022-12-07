@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Stock : MonoBehaviour
 {
@@ -111,6 +110,5 @@ public class Stock : MonoBehaviour
        {
          maxMinerals *= 2;
        }
-        Debug.Log(maxMinerals);
     }
 }
