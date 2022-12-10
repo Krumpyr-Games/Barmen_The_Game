@@ -1,36 +1,49 @@
 using SavingSystems.Interfaces;
 using SavingSystems.Systems;
+using System.IO;
 using UnityEngine;
 
 public class MineralActivator : MonoBehaviour
 {
-    private const string _path = "MineralData.json";
+    private const string _path = "/MineralData.json";
 
     [SerializeField] private Mineral[] _minerals;
-    private MineralScripteblObject[] _mineralsBox;
-    private IDataSaver<MineralScripteblObject> _dataSaver;
+    [SerializeField] private MineralScripteblObject[] _mineralsScriptbObj;
+    [SerializeField] private MineralUp MineralUp;
+
+    private IDataSaver<int> SavingSystems;
+
+    private int[] MinerlsLvlLoad;
+    private int[] MineralsLvlSave;
+
     private int _mineralNow = 0;
     private bool _firstStart = false;
-
     private void Awake()
     {
-        _dataSaver = new SavingSystem<MineralScripteblObject>();
-        Debug.Log(Application.persistentDataPath + _path);
+        SavingSystems = new SavingSystem<int>();
+        if (!File.Exists(Application.dataPath + _path)) return;
 
-        _mineralsBox = _dataSaver.LoadObjects(Application.persistentDataPath + _path);
+        MineralsLvlSave = SavingSystems.LoadObjects(Application.dataPath + _path);
+
+        if (MineralsLvlSave.Length != _minerals.Length) { throw new System.IndexOutOfRangeException(
+            "System need litel more mineral up"); return; }
+
         for (int i = 0; i < _minerals.Length; i++)
         {
-            _minerals[i].SetSeifMineral(_mineralsBox[i]);
+            _minerals[i].SetSeifMineral(_mineralsScriptbObj[MineralsLvlSave[i]]);
+            _minerals[i]._text.text = MineralUp.GetMineralUpPrayseWithutChekingManey(_minerals[i].MineralTaype.MineralLvl).ToString();
         }
     }
 
     private void OnApplicationQuit()
-    {
+    {       
+        MinerlsLvlLoad = new int[_minerals.Length];
         for (int i = 0; i < _minerals.Length; i++)
         {
-            _mineralsBox[i] = _minerals[i].MineralTaype;
+            MinerlsLvlLoad[i] = _minerals[i].MineralTaype.MineralLvl;
         }
-        _dataSaver.SaveObjects(_mineralsBox, Application.persistentDataPath + _path);
+
+        SavingSystems.SaveObjects(MinerlsLvlLoad, Application.dataPath + _path);
     }
 
     public void ActiveitNextMineral()

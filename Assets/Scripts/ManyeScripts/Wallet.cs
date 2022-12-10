@@ -2,11 +2,17 @@ using SavingSystems.Interfaces;
 using SavingSystems.Systems;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Wallet : MonoBehaviour
 {
-    [SerializeField] private ManeyUi _maneyUi;
     private const string _path = "ManeyDataFile.json";
+
+    [SerializeField] private ManeyUi _maneyUi;
+    [SerializeField] private AudioClip _audioClip;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private Slider _slider;
+
     private IDataSaver<int> _dataProvider;
 
     public int Maney { get; private set; } = 0;
@@ -20,9 +26,13 @@ public class Wallet : MonoBehaviour
         _maneyUi.SetNewManeyUi(Maney);
     }
 
+    private void Update()
+    {
+        _audioSource.volume = _slider.value;
+    }
+
     private void OnApplicationQuit()
     {
-        Debug.Log(Application.persistentDataPath + _path);
         _dataProvider.SaveObject(Maney, Application.persistentDataPath + _path);
     }
 
@@ -44,5 +54,6 @@ public class Wallet : MonoBehaviour
         if (PluseManey <= 0) return;
         Maney += PluseManey;
         _maneyUi.SetNewManeyUi(Maney);
+        _audioSource.PlayOneShot(_audioClip);
     }
 }

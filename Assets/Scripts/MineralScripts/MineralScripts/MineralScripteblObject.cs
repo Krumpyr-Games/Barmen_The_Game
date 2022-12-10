@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Mineral" , menuName ="GamePlay/NewMineral")]
 public class MineralScripteblObject : ScriptableObject

@@ -2,29 +2,27 @@ using UnityEngine;
 
 public class UpMineralPlayerBehavior : IPlayerBehavior
 {
-    public UpMineralPlayerBehavior(GameObject _skipBatton , GameObject[] _shop , MineralTextPrayseController _panelTexts , MineralUp _mineralUp)
+    public UpMineralPlayerBehavior(GameObject _skipBatton , GameObject[] _shop ,  MineralUp _mineralUp)
     {
         this._skipBatton = _skipBatton;
         this._shop = _shop;
-        this._panelTextsController = _panelTexts;
         this._mineralUp = _mineralUp;
     }
 
-    private MineralTextPrayseController _panelTextsController;
     private GameObject[] _shop;
     private GameObject _skipBatton;
     private MineralUp _mineralUp;
 
     public void Enter()
     {
-        _panelTextsController.ActiveitPrayseText(true);
+        _mineralUp.SetActivitMineralTexts(true);
         ChangeActiviteGameObj(_shop, false);
         _skipBatton.SetActive(true);
     }
 
     public void Exit()
     {
-        _panelTextsController.ActiveitPrayseText(false);        
+        _mineralUp.SetActivitMineralTexts(false);
         ChangeActiviteGameObj(_shop, true);
         _skipBatton.SetActive(false);
     }

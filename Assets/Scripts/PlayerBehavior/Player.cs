@@ -21,8 +21,7 @@ public class Player : MonoBehaviour
     {
         PlayerBehaviorMap = new Dictionary<Type, IPlayerBehavior>();
 
-        this.PlayerBehaviorMap[typeof(UpMineralPlayerBehavior)] = new UpMineralPlayerBehavior(_skipBatton , _shop , 
-            _mineralUp._mineralTextController, _mineralUp);
+        this.PlayerBehaviorMap[typeof(UpMineralPlayerBehavior)] = new UpMineralPlayerBehavior(_skipBatton , _shop , _mineralUp);
         this.PlayerBehaviorMap[typeof(UpWorkerPlayerBehavior)] = new UpWorkerPlayerBehavior();
         this.PlayerBehaviorMap[typeof(WorkPlayerBehavior)] = new WorkPlayerBehavior();
     }

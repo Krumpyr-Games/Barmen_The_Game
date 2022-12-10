@@ -1,4 +1,3 @@
-using SavingSystems.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,6 +52,5 @@ public class Mineral : MonoBehaviour
         if (mineralScriptebl == null) return;
         _mineral = mineralScriptebl;
         _icon.sprite = mineralScriptebl.MineralIcon;
-
     }
 }

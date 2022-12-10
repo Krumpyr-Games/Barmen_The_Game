@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using UnityEngine;
+
 
 public class MineralUp : MonoBehaviour
 {
@@ -22,17 +21,12 @@ public class MineralUp : MonoBehaviour
 
     [Header("Required data and links for MineralTextPrayse")]
     [SerializeField] private Mineral[] _mineralTexts;
-    [SerializeField] private int _startPrayse;
-    public MineralTextPrayseController _mineralTextController;
 
-  
 
     private void OnEnable()
     {
-        _mineralTextController = new MineralTextPrayseController(_mineralTexts, _startPrayse);
-        _mineralTextController.InitializeitMineralTextPrayse();
-
-         Mineral.MineralUpdaiter += SetNewMineral;      
+         Mineral.MineralUpdaiter += SetNewMineral;
+        Initialization();
     }
 
     private void OnDisable()
@@ -46,11 +40,11 @@ public class MineralUp : MonoBehaviour
        {
             if(mineral.MineralTaype.MineralLvl + 1 == _minerals[i].MineralLvl)
             {
-                int _prayse = GetMineralUpPrayse(mineral.MineralTaype);
+                int _prayse = GetMineralUpPrayse(mineral.MineralTaype.MineralLvl);
 
                 if (_prayse == 0) return mineral.MineralTaype;            
                 _wallet.MinuseManey(_prayse); 
-                mineral._text.text = _prayse.ToString();
+                mineral._text.text = GetMineralUpPrayseWithutChekingManey(mineral.MineralTaype.MineralLvl + 1).ToString();
                 return _minerals[i];
             }
        }
@@ -63,20 +57,34 @@ public class MineralUp : MonoBehaviour
         return mineral.MineralTaype;
     }
 
-   public int GetMineralUpPrayse(MineralScripteblObject mineral)
+   public int GetMineralUpPrayse(int mineral)
    {
-        double _prayse = 10;
-        for (int i = 0; i < mineral.MineralLvl + 1; i++)
-        {
-            _prayse *= Math.Pow(_procentUpPrayse, _stepen);           
-        }
-        _prayse = Math.Round(_prayse);
-        int _endPrayse = Convert.ToInt32(_prayse);
-        bool _haveManey = _wallet.EnoughMoney(_endPrayse);
-        if (_haveManey == false) return 0;
-
-        return _endPrayse;
+        int maney = (10 * (mineral + 1)) * 5;
+        if (!_wallet.EnoughMoney(maney)) return 0;
+        return maney;
    }
 
- 
+    public int GetMineralUpPrayseWithutChekingManey(int mineral)
+    {
+        return (10 * (mineral + 1)) * 5;
+    }
+
+    private void Initialization()
+    {
+        for (int i = 0; i < _mineralTexts.Length; i++)
+        {
+            if (_mineralTexts[i].gameObject.activeSelf)
+            {
+              _mineralTexts[i]._text.text = GetMineralUpPrayseWithutChekingManey(_mineralTexts[i].MineralTaype.MineralLvl).ToString(); 
+            }
+        }
+    }
+        
+    public void SetActivitMineralTexts(bool Activiti)
+    {
+        for (int i = 0; i < _mineralTexts.Length; i++)
+        {
+            _mineralTexts[i]._text.gameObject.SetActive(Activiti);
+        }
+    }
 }
