@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bronz
   m_EditorClassIdentifier: 
   _price: 1
-  _mineralLvl: 0
-  _mineralIcon: {fileID: -555902155, guid: f580bebc805c8ca4ea79da6760b3fbdb, type: 3}
+  _mineralLvl: 1
+  _mineralIcon: {fileID: 1208274905, guid: 450ac2c90a2202e45b93571cf102d3e4, type: 3}

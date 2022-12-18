@@ -1,3 +1,5 @@
+using SavingSystems.Interfaces;
+using SavingSystems.Systems;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,23 +16,45 @@ public class Stock : MonoBehaviour
     public static event ResetAmount ResertAmounts;
 
     public List<MineralScripteblObject> Minerals { get; private set; } = new List<MineralScripteblObject>();
-    public Dictionary<int, int> MineralStock { get; private set; } = new Dictionary<int, int>()
-    {
-    };
+    public Dictionary<int, int> MineralStock { get; private set; } = new Dictionary<int, int>(){};
 
     [SerializeField] private Wallet _maney;
     [SerializeField] private Laky _laky;
+    [SerializeField] private WarrningButtoAnim _warrningButtoAnim;
     [Header("Game Settings")]
     [SerializeField] private int _timeBeforSell;
     [SerializeField] private int StockAmountOfSpace = 20;
-   
+    [SerializeField] private ShopBattonController _shopBattonController;
 
+    private IDataSaver<MineralData> _dataSaver;
     private int maxMinerals = 20;
     private int mineralsColl;
     private float TheRestOfTime;
     private int _stockLvl = 1;
 
     public int StockLvl => _stockLvl;
+
+
+    private void OnEnable()
+    {
+        _dataSaver = new JsonSavingSystem<MineralData>();
+       
+        MineralData mineralData = _dataSaver.LoadObject(Application.persistentDataPath + "mineralData.json");
+
+        maxMinerals = mineralData.MaxCount;
+        mineralsColl = mineralData.MineralCool;
+        TheRestOfTime = mineralData.ResetTime;
+        _stockLvl = mineralData.StockLvl;
+        _shopBattonController.UpdaiteStockUi(_stockLvl);
+    }
+
+    private void OnApplicationQuit()
+    {
+        MineralData mineralData = new MineralData(_stockLvl, maxMinerals, TheRestOfTime, mineralsColl);
+        _dataSaver.SaveObject(mineralData, Application.persistentDataPath + "mineralData.json");
+
+        SellAll();
+    }
 
     private void Start()
     {
@@ -44,7 +68,6 @@ public class Stock : MonoBehaviour
         if (TheRestOfTime < 0) 
         {
             SellAll();
-            //SellAll();
             TheRestOfTime = _timeBeforSell; 
         }    
     }
@@ -55,7 +78,11 @@ public class Stock : MonoBehaviour
         {
             if (mineralsColl + 1 > maxMinerals)
             {
-                Debug.Log("Склад переполнен");
+                if (_warrningButtoAnim.EndAnim)
+                {
+                    StartCoroutine(_warrningButtoAnim.WarningButtonPlayAnim("Stock full"));
+                }
+                _warrningButtoAnim.SetWarningButtonActivity();
                 return;
             }
             else
@@ -100,7 +127,7 @@ public class Stock : MonoBehaviour
         TheRestOfTime = _timeBeforSell;
         SellAll();
     }
-
+    
     public void UpdaiteSock()
     {
        _stockLvl += 1;

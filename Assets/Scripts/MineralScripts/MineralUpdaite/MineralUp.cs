@@ -9,15 +9,10 @@ public class MineralUp : MonoBehaviour
     [Header("Links to resources")]
     [SerializeField] private MineralUp _mineralUp;
     [SerializeField] private Stock _stock;
-    [SerializeField] private WarningMaxMineralLvlAnim _warningMaxMineralLvlAnim;
+    [SerializeField] private WarrningButtoAnim _warninButtong;
 
-    [Header("MineralUp Settings")]
-    
-    [SerializeField] private int _timeBeforDisActiveit;
     [Header("Under the account")]
     [SerializeField] private Wallet _wallet;
-    [SerializeField] private int _stepen;
-    [SerializeField] private float _procentUpPrayse;
 
     [Header("Required data and links for MineralTextPrayse")]
     [SerializeField] private Mineral[] _mineralTexts;
@@ -48,11 +43,11 @@ public class MineralUp : MonoBehaviour
                 return _minerals[i];
             }
        }
-        if (!_warningMaxMineralLvlAnim._palayAnimation)
+        if (_warninButtong.EndAnim)
         {
-            StartCoroutine(_warningMaxMineralLvlAnim.MaximumLevelWarningPanelLaife(_timeBeforDisActiveit));
-            _warningMaxMineralLvlAnim.AnimationChange();
+            StartCoroutine(_warninButtong.WarningButtonPlayAnim("Mineral have max lvl"));
         }
+            _warninButtong.SetWarningButtonActivity();
 #pragma warning disable CS0162
         return mineral.MineralTaype;
     }
@@ -84,7 +79,7 @@ public class MineralUp : MonoBehaviour
     {
         for (int i = 0; i < _mineralTexts.Length; i++)
         {
-            _mineralTexts[i]._text.gameObject.SetActive(Activiti);
+            if (_mineralTexts[i].gameObject.activeSelf) _mineralTexts[i]._text.gameObject.SetActive(Activiti);
         }
     }
 }

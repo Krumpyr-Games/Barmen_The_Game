@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe0ec9c956f02c49b9258e889ec3718, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  _price: 3
-  _mineralLvl: 2
-  _mineralIcon: {fileID: 1132428720, guid: f580bebc805c8ca4ea79da6760b3fbdb, type: 3}
+  _price: 2
+  _mineralLvl: 4
+  _mineralIcon: {fileID: 513163670, guid: 450ac2c90a2202e45b93571cf102d3e4, type: 3}

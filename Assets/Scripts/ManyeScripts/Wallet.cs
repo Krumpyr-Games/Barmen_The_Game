@@ -12,6 +12,7 @@ public class Wallet : MonoBehaviour
     [SerializeField] private AudioClip _audioClip;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private Slider _slider;
+    [SerializeField] private WarrningButtoAnim _anim;
 
     private IDataSaver<int> _dataProvider;
 
@@ -19,7 +20,7 @@ public class Wallet : MonoBehaviour
 
     private void Start()
     {
-        _dataProvider = new SavingSystem<int>();
+        _dataProvider = new JsonSavingSystem<int>();
         if (!File.Exists(Application.persistentDataPath + _path)) return;
 
         Maney = _dataProvider.LoadObject(Application.persistentDataPath + _path);
@@ -38,13 +39,13 @@ public class Wallet : MonoBehaviour
 
     public bool EnoughMoney(int MinuseManey)
     {
-        if (Maney - MinuseManey > 0) return true;
+        if (Maney - MinuseManey >= 0) { _anim.WarningButtonPlayAnim("You haven`t money"); ; return true; }
         return false;
     }
 
     public void MinuseManey(int MinseManey)
     {
-        if (Maney <= 0) return;
+        if (Maney <= 0) { _anim.WarningButtonPlayAnim("You haven`t money"); ; return; }
         Maney -= MinseManey;
         _maneyUi.SetNewManeyUi(Maney);
     }

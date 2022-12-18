@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Iron
   m_EditorClassIdentifier: 
   _price: 2
-  _mineralLvl: 1
-  _mineralIcon: {fileID: -712660493, guid: f580bebc805c8ca4ea79da6760b3fbdb, type: 3}
+  _mineralLvl: 2
+  _mineralIcon: {fileID: 2093360558, guid: 450ac2c90a2202e45b93571cf102d3e4, type: 3}
