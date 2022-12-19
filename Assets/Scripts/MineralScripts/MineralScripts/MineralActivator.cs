@@ -8,6 +8,7 @@ public class MineralActivator : MonoBehaviour
 {
     private const string _pathToMineral = "/MineralData.json";
     private const string _pathToMineralActivity = "/MineralActivityData.json";
+    private const string _pathToMineralIndex = "/MineralIndexData.json";
 
     [SerializeField] private Mineral[] _minerals;
     [SerializeField] private MineralScripteblObject[] _mineralsScriptbObj;
@@ -40,12 +41,12 @@ public class MineralActivator : MonoBehaviour
 
     public void ActiveitNextMineral()
     {
-        if (!_firstStart)
-        {
-            _firstStart = true;
-            _minerals[_mineralNow].gameObject.SetActive(true);
-            return;
-        }
+        //if (!_firstStart)
+        //{
+        //    _firstStart = true;
+        //    _minerals[_mineralNow].gameObject.SetActive(true);
+        //    return;
+        //}
         int prayse = GetPrayse();
 
         if (!_wallet.EnoughMoney(prayse)){ _warningAnim.WarningButtonPlayAnim("You havn`t money");return;}
@@ -98,6 +99,8 @@ public class MineralActivator : MonoBehaviour
         {
             _minerals[i].gameObject.SetActive(MineralActivity[i]);
         }
+
+        _index = SavingSystems.LoadObject(Application.dataPath + _pathToMineralIndex);
     }
 
     public void SaveObj()
@@ -117,5 +120,7 @@ public class MineralActivator : MonoBehaviour
         SavingSystems.SaveObjects(MinerlsLvlLoad, Application.dataPath + _pathToMineral);
 
         SavingSystemsScriptb.SaveObjects(MineralActivity , Application.dataPath + _pathToMineralActivity);
+       
+        SavingSystems.SaveObject(_index, Application.dataPath + _pathToMineralIndex);
     }
 }

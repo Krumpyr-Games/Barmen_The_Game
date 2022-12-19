@@ -19,7 +19,7 @@ public class Wallet : MonoBehaviour
     public int Maney { get; private set; } = 0;
 
     private void Start()
-    {
+    {    
         _dataProvider = new JsonSavingSystem<int>();
         if (!File.Exists(Application.persistentDataPath + _path)) return;
 
@@ -39,7 +39,7 @@ public class Wallet : MonoBehaviour
 
     public bool EnoughMoney(int MinuseManey)
     {
-        if (Maney - MinuseManey >= 0) { _anim.WarningButtonPlayAnim("You haven`t money"); ; return true; }
+        if (Maney - MinuseManey >= 0)  return true;
         return false;
     }
 
